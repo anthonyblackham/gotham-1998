@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 2921px;
+            height: 1750px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/GothamMask_1.js"></script>
+        <script src="data/GothamBoundary_2.js"></script>
+        <script src="data/GothamStreets_3.js"></script>
+        <script src="data/GothamLabels_4.js"></script>
+        <script src="data/GothamVillainSightings_5.js"></script>
+        <script src="data/GothamPOI_6.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[39.3620,-74.1704],[39.5620,-74.3704]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_StamenToner_0');
+        map.getPane('pane_StamenToner_0').style.zIndex = 400;
+        var layer_StamenToner_0 = L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+            pane: 'pane_StamenToner_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_StamenToner_0;
+        map.addLayer(layer_StamenToner_0);
+        function pop_GothamMask_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape__Area'] !== null ? autolinker.link(feature.properties['Shape__Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape__Length'] !== null ? autolinker.link(feature.properties['Shape__Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_GothamMask_1_0() {
+            return {
+                pane: 'pane_GothamMask_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_GothamMask_1');
+        map.getPane('pane_GothamMask_1').style.zIndex = 401;
+        map.getPane('pane_GothamMask_1').style['mix-blend-mode'] = 'normal';
+        var layer_GothamMask_1 = new L.geoJson(json_GothamMask_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_GothamMask_1',
+            layerName: 'layer_GothamMask_1',
+            pane: 'pane_GothamMask_1',
+            onEachFeature: pop_GothamMask_1,
+            style: style_GothamMask_1_0,
+        });
+        bounds_group.addLayer(layer_GothamMask_1);
+        map.addLayer(layer_GothamMask_1);
+        function pop_GothamBoundary_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape__Area'] !== null ? autolinker.link(feature.properties['Shape__Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape__Length'] !== null ? autolinker.link(feature.properties['Shape__Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_GothamBoundary_2_0() {
+            return {
+                pane: 'pane_GothamBoundary_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_GothamBoundary_2');
+        map.getPane('pane_GothamBoundary_2').style.zIndex = 402;
+        map.getPane('pane_GothamBoundary_2').style['mix-blend-mode'] = 'normal';
+        var layer_GothamBoundary_2 = new L.geoJson(json_GothamBoundary_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_GothamBoundary_2',
+            layerName: 'layer_GothamBoundary_2',
+            pane: 'pane_GothamBoundary_2',
+            onEachFeature: pop_GothamBoundary_2,
+            style: style_GothamBoundary_2_0,
+        });
+        bounds_group.addLayer(layer_GothamBoundary_2);
+        map.addLayer(layer_GothamBoundary_2);
+        function pop_GothamStreets_3(feature, layer) {
+        }
+
+        function style_GothamStreets_3_0() {
+            return {
+                pane: 'pane_GothamStreets_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_GothamStreets_3');
+        map.getPane('pane_GothamStreets_3').style.zIndex = 403;
+        map.getPane('pane_GothamStreets_3').style['mix-blend-mode'] = 'normal';
+        var layer_GothamStreets_3 = new L.geoJson(json_GothamStreets_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_GothamStreets_3',
+            layerName: 'layer_GothamStreets_3',
+            pane: 'pane_GothamStreets_3',
+            onEachFeature: pop_GothamStreets_3,
+            style: style_GothamStreets_3_0,
+        });
+        bounds_group.addLayer(layer_GothamStreets_3);
+        map.addLayer(layer_GothamStreets_3);
+        function pop_GothamLabels_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_GothamLabels_4_0() {
+            return {
+                pane: 'pane_GothamLabels_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(207,207,207,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_GothamLabels_4');
+        map.getPane('pane_GothamLabels_4').style.zIndex = 404;
+        map.getPane('pane_GothamLabels_4').style['mix-blend-mode'] = 'normal';
+        var layer_GothamLabels_4 = new L.geoJson(json_GothamLabels_4, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_GothamLabels_4',
+            layerName: 'layer_GothamLabels_4',
+            pane: 'pane_GothamLabels_4',
+            onEachFeature: pop_GothamLabels_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_GothamLabels_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_GothamLabels_4);
+        map.addLayer(layer_GothamLabels_4);
+        function pop_GothamVillainSightings_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">VillainName</th>\
+                        <td>' + (feature.properties['VillainName'] !== null ? autolinker.link(feature.properties['VillainName'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Time</th>\
+                        <td>' + (feature.properties['Time'] !== null ? autolinker.link(feature.properties['Time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_GothamVillainSightings_5_0() {
+            return {
+                pane: 'pane_GothamVillainSightings_5',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(218,218,218,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_GothamVillainSightings_5');
+        map.getPane('pane_GothamVillainSightings_5').style.zIndex = 405;
+        map.getPane('pane_GothamVillainSightings_5').style['mix-blend-mode'] = 'normal';
+        var layer_GothamVillainSightings_5 = new L.geoJson(json_GothamVillainSightings_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_GothamVillainSightings_5',
+            layerName: 'layer_GothamVillainSightings_5',
+            pane: 'pane_GothamVillainSightings_5',
+            onEachFeature: pop_GothamVillainSightings_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_GothamVillainSightings_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_GothamVillainSightings_5);
+        map.addLayer(layer_GothamVillainSightings_5);
+        function pop_GothamPOI_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_GothamPOI_6_0() {
+            return {
+                pane: 'pane_GothamPOI_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_GothamPOI_6');
+        map.getPane('pane_GothamPOI_6').style.zIndex = 406;
+        map.getPane('pane_GothamPOI_6').style['mix-blend-mode'] = 'normal';
+        var layer_GothamPOI_6 = new L.geoJson(json_GothamPOI_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_GothamPOI_6',
+            layerName: 'layer_GothamPOI_6',
+            pane: 'pane_GothamPOI_6',
+            onEachFeature: pop_GothamPOI_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_GothamPOI_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_GothamPOI_6);
+        map.addLayer(layer_GothamPOI_6);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/GothamPOI_6.png" /> Gotham-POI': layer_GothamPOI_6,'<img src="legend/GothamVillainSightings_5.png" /> Gotham-VillainSightings': layer_GothamVillainSightings_5,'<img src="legend/GothamLabels_4.png" /> Gotham-Labels': layer_GothamLabels_4,'<img src="legend/GothamStreets_3.png" /> Gotham-Streets': layer_GothamStreets_3,'<img src="legend/GothamBoundary_2.png" /> Gotham-Boundary': layer_GothamBoundary_2,'<img src="legend/GothamMask_1.png" /> Gotham-Mask': layer_GothamMask_1,"Stamen Toner": layer_StamenToner_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_GothamLabels_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-weight: bold; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_GothamLabels_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_GothamPOI_6.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Name'] !== null?String('<div style="color: #000000; font-size: 8pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_GothamPOI_6'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_GothamLabels_4,layer_GothamPOI_6]);
+        map.on("zoomend", function(){
+            resetLabels([layer_GothamLabels_4,layer_GothamPOI_6]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_GothamLabels_4,layer_GothamPOI_6]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_GothamLabels_4,layer_GothamPOI_6]);
+        });
+        </script>
+    </body>
+</html>
